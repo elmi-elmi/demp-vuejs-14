@@ -86,34 +86,36 @@ button:active {
 }
 .animate {
   /* transform: translateX(-100px); */
-  animation: slide-fade 0.5s ease-out forwards;
+  animation: slide-scale 0.5s ease-out forwards;
 }
 
 .v-enter-from {
-  opacity: 0;
-  transform: translateY(-50px);
+  /* opacity: 0;
+  transform: translateY(-50px); */
 }
 .v-enter-active {
-  transition: all 0.3s ease-out;
+  /* transition: all 0.3s ease-out; */
 }
 .v-enter-to {
-  opacity: 1;
-  transform: translateY(0px);
+  /* opacity: 1;
+  transform: translateY(0px); */
+  animation: slide-scale 0.5s ease-in;
 }
 .v-leave-from {
-  opacity: 1;
-  transform: translateY(0px);
+  /* opacity: 1;
+  transform: translateY(0px); */
 }
 
 .v-leave-active {
-  transition: all 0.3s ease-in;
+  /* transition: all 0.3s ease-in; */
+  animation: slide-scale 0.5s ease-out;
 }
 .v-leave-to {
-  opacity: 0;
-  transform: translateY(-50px);
+  /* opacity: 0;
+  transform: translateY(-50px); */
 }
 
-@keyframes slide-fade {
+@keyframes slide-scale {
   0% {
     transform: translateX(0) scale(1);
   }

@@ -21,12 +21,24 @@
   <div class="container">
     <button @click="showDialog">Show Dialog</button>
   </div>
+
+  <div class="container">
+    <transition name="fade-button" mode="out-in">
+      <button @click="showButton" v-if="buttonsAreVisible">show</button>
+      <button @click="hideButton" v-else>hidden</button>
+    </transition>
+  </div>
 </template>
 
 <script>
 export default {
   data() {
-    return { dialogIsVisible: false, animatedBlock: false, paraIsAppere: true };
+    return {
+      dialogIsVisible: false,
+      animatedBlock: false,
+      paraIsAppere: true,
+      buttonsAreVisible: true
+    };
   },
   methods: {
     showDialog() {
@@ -40,6 +52,12 @@ export default {
     },
     togglePara() {
       this.paraIsAppere = !this.paraIsAppere;
+    },
+    showButton() {
+      this.buttonsAreVisible = false;
+    },
+    hideButton() {
+      this.buttonsAreVisible = true;
     }
   }
 };
@@ -116,6 +134,21 @@ button:active {
 .para-leave-to {
   /* opacity: 0;
   transform: translateY(-50px); */
+}
+
+.fade-button-enter-from,
+.fade-button-leave-to {
+  opacity: 0;
+}
+.fade-button-enter-active {
+  transition: opacity 0.3s ease-out;
+}
+.fade-button-leave-active {
+  transition: opacity 0.3s ease-in;
+}
+.fade-button-enter-to,
+.fade-button-leave-from {
+  opacity: 1;
 }
 
 @keyframes slide-scale {

@@ -5,6 +5,12 @@
       Animate
     </button>
   </div>
+  <div class="container">
+    <transition>
+      <p v-if="paraIsAppere">something appeare and disappere....</p>
+    </transition>
+    <button @click="togglePara">toggle</button>
+  </div>
   <base-modal @close="hideDialog" v-if="dialogIsVisible">
     <p>This is a test dialog!</p>
     <button @click="hideDialog">Close it!</button>
@@ -17,7 +23,7 @@
 <script>
 export default {
   data() {
-    return { dialogIsVisible: false, animatedBlock: false };
+    return { dialogIsVisible: false, animatedBlock: false, paraIsAppere: true };
   },
   methods: {
     showDialog() {
@@ -28,6 +34,9 @@ export default {
     },
     animateBlock() {
       this.animatedBlock = true;
+    },
+    togglePara() {
+      this.paraIsAppere = !this.paraIsAppere;
     }
   }
 };
@@ -78,6 +87,30 @@ button:active {
 .animate {
   /* transform: translateX(-100px); */
   animation: slide-fade 0.5s ease-out forwards;
+}
+
+.v-enter-from {
+  opacity: 0;
+  transform: translateY(-50px);
+}
+.v-enter-active {
+  transition: all 0.3s ease-out;
+}
+.v-enter-to {
+  opacity: 1;
+  transform: translateY(0px);
+}
+.v-leave-from {
+  opacity: 1;
+  transform: translateY(0px);
+}
+
+.v-leave-active {
+  transition: all 0.3s ease-in;
+}
+.v-leave-to {
+  opacity: 0;
+  transform: translateY(-50px);
 }
 
 @keyframes slide-fade {

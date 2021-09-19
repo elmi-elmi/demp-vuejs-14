@@ -40,7 +40,7 @@ dialog {
   /* animation: modal 0.3s ease-in forwards; */
 }
 
-.modal-enter-to {
+/* .modal-enter-to {
 }
 .modal-enter-active {
   animation: modal 0.3s ease-out;
@@ -49,7 +49,7 @@ dialog {
   animation: modal 0.3s ease-in reverse;
 }
 .modal-enter-from {
-}
+} */
 @keyframes modal {
   from {
     opacity: 0;

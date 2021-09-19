@@ -7,8 +7,10 @@
   </div>
   <div class="container">
     <!-- <transition enter-to-class="some-class" enter-active-class="some-other-class"> -->
+    <!-- <transition
+      name="para" -->
     <transition
-      name="para"
+      :css="false"
       @before-enter="beforeEnter"
       @enter="enter"
       @after-enter="afterEnter"

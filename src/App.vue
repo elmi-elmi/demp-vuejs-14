@@ -7,7 +7,17 @@
   </div>
   <div class="container">
     <!-- <transition enter-to-class="some-class" enter-active-class="some-other-class"> -->
-    <transition name="para">
+    <transition
+      name="para"
+      @before-enter="beforeEnter"
+      @enter="enter"
+      @after-enter="afterEnter"
+      @before-leave="beforeLeave"
+      @leave="leave"
+      @after-leave="afterLeave"
+      @enter-cancelled="enterCancelled"
+      @leave-cancelled="leaveCancelled"
+    >
       <p v-if="paraIsAppere">something appeare and disappere....</p>
     </transition>
     <button @click="togglePara">toggle</button>
@@ -37,10 +47,64 @@ export default {
       dialogIsVisible: false,
       animatedBlock: false,
       paraIsAppere: true,
-      buttonsAreVisible: true
+      buttonsAreVisible: true,
+      intervalEnter: null,
+      intervalLeave: null
     };
   },
   methods: {
+    enterCancelled(el) {
+      console.log(el);
+      clearInterval(this.intervalEnter);
+    },
+    leaveCancelled(el) {
+      console.log(el);
+      clearInterval(this.intervalLeave);
+    },
+    beforeEnter(el) {
+      console.log('beforeEnter');
+      console.log(el);
+      el.style.opacity = 0;
+    },
+    enter(el, done) {
+      console.log('enter');
+      console.log(el);
+      let round = 1;
+      this.intervalEnter = setInterval(() => {
+        el.style.opacity = 0.01 * round;
+        round++;
+        if (round > 100) {
+          clearInterval(this.intervalEnter);
+          done();
+        }
+      }, 20);
+    },
+    afterEnter(el) {
+      console.log('afterEnter');
+      console.log(el);
+    },
+    beforeLeave(el) {
+      console.log('beforeLeave');
+      console.log(el);
+      el.style.opacity = 1;
+    },
+    leave(el, done) {
+      console.log('leave');
+      console.log(el);
+      let round = 1;
+      this.intervalLeave = setInterval(() => {
+        el.style.opacity = 1 - 0.01 * round;
+        round++;
+        if (round > 100) {
+          clearInterval(this.intervalLeave);
+          done();
+        }
+      }, 20);
+    },
+    afterLeave(el) {
+      console.log('afterLeave');
+      console.log(el);
+    },
     showDialog() {
       this.dialogIsVisible = true;
     },
@@ -106,35 +170,35 @@ button:active {
   border-radius: 12px;
 }
 .animate {
-  /* transform: translateX(-100px); */
+  transform: translateX(-100px);
   animation: slide-scale 0.5s ease-out forwards;
 }
-
+/* 
 .para-enter-from {
-  /* opacity: 0;
-  transform: translateY(-50px); */
+   opacity: 0;
+  transform: translateY(-50px);
 }
 .para-enter-active {
-  /* transition: all 0.3s ease-out; */
+  transition: all 0.3s ease-out;
 }
 .para-enter-to {
-  /* opacity: 1;
-  transform: translateY(0px); */
+  opacity: 1;
+  transform: translateY(0px);
   animation: slide-scale 0.3s ease-in;
 }
 .para-leave-from {
-  /* opacity: 1;
-  transform: translateY(0px); */
+  opacity: 1;
+  transform: translateY(0px);
 }
 
 .para-leave-active {
-  /* transition: all 0.3s ease-in; */
+  transition: all 0.3s ease-in;
   animation: slide-scale 0.3s ease-out;
 }
 .para-leave-to {
-  /* opacity: 0;
-  transform: translateY(-50px); */
-}
+  opacity: 0;
+  transform: translateY(-50px);
+} */
 
 .fade-button-enter-from,
 .fade-button-leave-to {

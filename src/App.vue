@@ -1,5 +1,10 @@
 <template>
-  <div class="container">
+  <router-view v-slot="slotProp">
+    <transition name="fade-button" mode="out-in">
+      <component :is="slotProp.Component"></component>
+    </transition>
+  </router-view>
+  <!-- <div class="container">
     <user-list></user-list>
   </div>
   <div class="container">
@@ -8,11 +13,11 @@
       Animate
     </button>
   </div>
-  <div class="container">
-    <!-- <transition enter-to-class="some-class" enter-active-class="some-other-class"> -->
-    <!-- <transition
+  <div class="container"> -->
+  <!-- <transition enter-to-class="some-class" enter-active-class="some-other-class"> -->
+  <!-- <transition
       name="para" -->
-    <transition
+  <!-- <transition
       :css="false"
       @before-enter="beforeEnter"
       @enter="enter"
@@ -26,9 +31,9 @@
       <p v-if="paraIsAppere">something appeare and disappere....</p>
     </transition>
     <button @click="togglePara">toggle</button>
-  </div>
+  </div> -->
   <!-- <base-modal @close="hideDialog" v-if="dialogIsVisible"> -->
-  <base-modal @close="hideDialog" :open="dialogIsVisible">
+  <!-- <base-modal @close="hideDialog" :open="dialogIsVisible">
     <p>This is a test dialog!</p>
     <button @click="hideDialog">Close it!</button>
   </base-modal>
@@ -42,13 +47,13 @@
       <button @click="showButton" v-if="buttonsAreVisible">show</button>
       <button @click="hideButton" v-else>hidden</button>
     </transition>
-  </div>
+  </div> -->
 </template>
 
 <script>
-import UserList from './components/UserList.vue';
+// import UserList from './components/UserList.vue';
 export default {
-  components: { UserList },
+  // components: { UserList },
   data() {
     return {
       dialogIsVisible: false,
